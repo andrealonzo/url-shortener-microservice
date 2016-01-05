@@ -5,7 +5,7 @@
 
 This is my implementation of the Timestamp Microservice basejump for Free Code Camp.  This project uses Node.js, Express, and Mocha for testing.
 
-The [Free Code Camp](http://www.freecodecamp.com) version of Clementine.js is meant for use when completing projects as part of the FCC curriculum. This version includes GitHub authentication using [Passport](http://passportjs.org/).
+A running version of this program can be found at https://timestamp-microservice.herokuapp.com/
 
 ## Testing
 

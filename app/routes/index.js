@@ -11,7 +11,6 @@ module.exports = function (app) {
 		.get(function (req, res) {
 			res.sendFile(path + '/public/index.html');
 		});
-
 	app.route('/:id')
 		.get(serviceHandler.convertTime);
 
