@@ -24,6 +24,26 @@ app.use(session({
 routes(app);
 
 var port = process.env.PORT || 8080;
-app.listen(port,  function () {
+var server;
+var boot = function () {
+	server= app.listen(port,  function () {
 	console.log('Node.js listening on port ' + port + '...');
-});
+	});
+	
+}
+
+var shutdown = function() {
+	if(server){
+		server.close();
+	}
+}
+
+if (require.main === module) {
+	boot();
+}
+else {
+	console.info('Running app as a module')
+	exports.boot = boot;
+	exports.shutdown = shutdown;
+	exports.port = port;
+}

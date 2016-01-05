@@ -18,11 +18,14 @@ function ServiceHandler () {
 	
 
 	this.convertTime = function (req, res) {
+		var naturalLanguageDate = null;
+		var unixDate = null;
+		if(!req){
+			res.json({"unix":unixDate,"natural":naturalLanguageDate});
+		}
 		var path = req.path;
 		var strDate= decodeURI(path.substr(1, path.length));
 		var date;
-		var naturalLanguageDate = null;
-		var unixDate = null;
 		if(isNaN(strDate) )
 		{
 			//natural language
