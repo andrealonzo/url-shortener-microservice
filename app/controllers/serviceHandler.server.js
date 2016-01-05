@@ -1,49 +1,26 @@
 'use strict';
 function ServiceHandler () {
-	
-	var months = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December'
-		];
-	
 
-	this.convertTime = function (req, res) {
-		var naturalLanguageDate = null;
-		var unixDate = null;
-		if(!req){
-			res.json({"unix":unixDate,"natural":naturalLanguageDate});
-		}
-		var path = req.path;
-		var strDate= decodeURI(path.substr(1, path.length));
-		var date;
-		if(isNaN(strDate) )
-		{
-			//natural language
-			date = new Date(strDate);
-		}else{
-			//unix timestamp
-			date = new Date(+strDate*1000);
-		}
-		if(date.getTime()){
-			unixDate = date.getTime()/1000;
-			naturalLanguageDate = 
-			months[date.getMonth()] +" " + 
-			date.getDate() + ", " + 
-			date.getFullYear();
+	this.whoAmI = function (req, res) {
+		var softwareRe = /\((.*?)\)/;
+
+		var softwareMatches = req.headers['user-agent'].match(softwareRe);
+		var software =null;
+		if(softwareMatches){
+			software = softwareMatches[1];
 		}
 		
-			
-		res.json({"unix":unixDate,"natural":naturalLanguageDate});
+		var language = null;
+		var accessLanguage = req.headers['accept-language'];
+		if(accessLanguage)
+		{
+			language = accessLanguage.split(",")[0];
+		}
+		res.json({
+			ipaddress:(req.headers['x-forwarded-for'] || req.headers['remote-addr']),
+			language:language,
+			software:software
+		});
 	};
 
 }

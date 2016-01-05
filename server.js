@@ -37,7 +37,6 @@ var shutdown = function() {
 		server.close();
 	}
 }
-
 if (require.main === module) {
 	boot();
 }
