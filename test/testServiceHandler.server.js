@@ -12,7 +12,7 @@
       it('should return proxy ip address of user',function(done){
         var ipAddress="192.168.1.1";
         superagent
-          .get('http://localhost:'+port)
+          .get('http://localhost:'+port+'/whoami')
           .set('Accept', 'application/json')
           .set('Remote-Addr', ipAddress)
           .end(function(err, res){
@@ -27,7 +27,7 @@
       it('should return ip address of user',function(done){
         var proxyIpAddress = "168.192.1.2";
         superagent
-          .get('http://localhost:'+port)
+          .get('http://localhost:'+port+'/whoami')
           .set('Accept', 'application/json')
           .set('X-Forwarded-For', proxyIpAddress)
           .end(function(err, res){
@@ -41,7 +41,7 @@
           var language = "en-US";
           var acceptLanguage = "en-US,en;q=0.8";
         superagent
-          .get('http://localhost:'+port)
+          .get('http://localhost:'+port+'/whoami')
           .set('Accept', 'application/json')
           .set('accept-language', acceptLanguage)
           .end(function(err, res){
@@ -55,7 +55,7 @@
           var software = "Macintosh; Intel Mac OS X 10_11_2";
           var userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36";
         superagent
-          .get('http://localhost:'+port)
+          .get('http://localhost:'+port+'/whoami')
           .set('Accept', 'application/json')
           .set('user-agent', userAgent)
           .end(function(err, res){
@@ -76,7 +76,7 @@
           
         var proxyIpAddress = "168.192.1.2";
         superagent
-          .get('http://localhost:'+port)
+          .get('http://localhost:'+port+'/whoami')
           .set('Accept', 'application/json')
           .set('Remote-Addr', ipAddress)
           .set('user-agent', userAgent)
@@ -100,7 +100,7 @@
           
         var proxyIpAddress = "168.192.1.2";
         superagent
-          .get('http://localhost:'+port)
+          .get('http://localhost:'+port+'/whoami')
           .set('Accept', 'application/json')
           .set('Remote-Addr', ipAddress)
           .set('x-forwarded-for', proxyIpAddress)

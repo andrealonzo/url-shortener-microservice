@@ -4,7 +4,7 @@
 
 	<head>
 		<link href='https://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
-		<title>Timestamp Microservice</title>
+		<title>Request Header Parser Microservice</title>
 			<link rel="stylesheet" href="/public/css/main.css">	
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -13,23 +13,16 @@
 	<body>
 		<div class="container">
 			<div class="jumbotron">
-			  <h1>Timestamp Microservice</h1>
+			  <h1>Request Header Parser Microservice</h1>
 			 <p> User stories:</p>
-<p>1) I can pass a string as a parameter, and it will check to see whether that string contains either a unix timetamp or a natural language date (example: January 1, 2016)
-</p>
-<p>
-2) If it does, it returns both the Unix timestamp and the natural language form of that date.
-</p>
-<p>
-3) If it does not contain a date or Unix timestamp, it returns null for those properties.
+<p>1)  I can get the IP address, language and operating system for my browser.
 </p>
 
 			</div>
 		<h1>	Example usage:</h1>
-<div><code><script>document.write(window.location.protocol +"//"+  window.location.hostname)</script>/December%2015,%202015</code></div>
-<code><script>document.write(window.location.protocol +"//"+   window.location.hostname)</script>/1450137600</code>
+<div><code><script>document.write(window.location.protocol +"//"+  window.location.hostname)</script>/whoami</code></div>
 <h1>Example output:</h1>
-<code>{ "unix": 1450137600, "natural": "December 15, 2015" }</code>
+<code>{"ipaddress":"91.85.22.858","language":"en-US","software":"Macintosh; Intel Mac OS X 10_11_2"}</code>
 		</div>
 
 	</body>
