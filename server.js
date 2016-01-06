@@ -51,11 +51,11 @@ var disconnectDB = function() {
 }
 
 if (require.main === module) {
-	connectDB(process.env.MONGO_DB_NAME);
+	connectDB(process.env.MONGO_DB);
 	boot();
 }
 else {
-	console.info('Running app as a module')
+	console.info('Running app as a module.')
 	exports.boot = boot;
 	exports.shutdown = shutdown;
 	exports.port = port;
