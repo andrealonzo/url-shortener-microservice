@@ -4,8 +4,7 @@
 
 	<head>
 		<link href='https://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
-		<title>Request Header Parser Microservice</title>
-			<link rel="stylesheet" href="/public/css/main.css">	
+		<title>URL Shortener Microservice</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 
@@ -13,16 +12,25 @@
 	<body>
 		<div class="container">
 			<div class="jumbotron">
-			  <h1>Request Header Parser Microservice</h1>
+			  <h1>URL Shortener Microservice</h1>
 			 <p> User stories:</p>
-<p>1)  I can get the IP address, language and operating system for my browser.
+<p>1)  I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.
+</p>
+<p>2)  If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.
+</p>
+<p>3)  When I visit that shortened URL, it will redirect me to my original link.
 </p>
 
 			</div>
-		<h1>	Example usage:</h1>
-<div><code><script>document.write(window.location.protocol +"//"+  window.location.hostname)</script>/whoami</code></div>
-<h1>Example output:</h1>
-<code>{"ipaddress":"91.85.22.858","language":"en-US","software":"Macintosh; Intel Mac OS X 10_11_2"}</code>
+		<h1>	Example creation usage:</h1>
+<div><code><script>document.write(window.location.protocol +"//"+  window.location.hostname)</script>/new/https://www.google.com </code></div>
+<div><code><script>document.write(window.location.protocol +"//"+  window.location.hostname)</script>/new/http://freecodecamp.com/newscode></div>
+<h1>Example creation output:</h1>
+<code>{ "original_url": "http://freecodecamp.com/news", "short_url": "https://shurli.herokuapp.com/4" }</code>
+<h1>Usage:</h1>
+<code>https://shurli.herokuapp.com/4</code>
+<h1>Will redirect to :</h1>
+<code>http://freecodecamp.com/news</code>
 		</div>
 
 	</body>
