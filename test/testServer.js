@@ -4,7 +4,6 @@
       disconnectDB = require('../').disconnectDB,
       port = require('../').port,
       superagent = require('superagent'),
-      mongoose = require('mongoose'),
       expect = require('expect.js');
     describe('server', function() {
       before(function() {
