@@ -1,6 +1,5 @@
 var connectDB = require('../').connectDB,
     disconnectDB = require('../').disconnectDB,
-    superagent = require('superagent'),
     mongoose = require('mongoose'),
     expect = require('expect.js');
 var path = process.cwd();
@@ -9,7 +8,7 @@ var ShortenerController = require(path + '/app/controllers/shortenerController.j
 describe('shortenerController', function() {
     var shortenerCtrl;
     before(function(done) {
-        connectDB();
+        connectDB("testCollection");
         shortenerCtrl = new ShortenerController();
         mongoose.connection.on('connected', function() {
 
@@ -91,7 +90,9 @@ describe('shortenerController', function() {
         it('should return new added url\'s code', function(done) {
             var url = "https://www.google.com";
             shortenerCtrl.shortenUrl(url, function(newUrl) {
-                shortenerCtrl.getUrl(newUrl.id, function(returnedUrl) {
+                console.log(newUrl);
+                console.log(newUrl.code);
+                shortenerCtrl.getUrl(newUrl.code, function(returnedUrl) {
                     expect(returnedUrl).to.be(url);
                     done();
                 });

@@ -2,6 +2,7 @@
 
 var path = process.cwd();
 var ShortenerController = require(path + '/app/controllers/shortenerController.js');
+
 function ServiceHandler () {
 
 	this.newUrl = function (req, res) {
@@ -12,7 +13,7 @@ function ServiceHandler () {
 			if(!newUrl){
 				return res.json({"error":"URL invalid"});
 			}
-			res.json({ "original_url": newUrl.value, "short_url": shortenedUrl +"/"+ newUrl.id });
+			res.json({ "original_url": newUrl.value, "short_url": shortenedUrl +"/"+ newUrl.code });
 		});
 	};
 	
