@@ -16,8 +16,13 @@ app.route('/')
 	.get(function (req, res) {
 		res.sendFile(path + '/public/index.html');
 	});
-app.route('/whoami')
-	.get(serviceHandler.whoAmI);
+	
+app.route(/new\/(.*)/)
+	.get(serviceHandler.newUrl);
+	
+app.route(/\/(.*)/)
+	.get(serviceHandler.getUrl);
+	
 		
 
 var port = process.env.PORT || 8080;
