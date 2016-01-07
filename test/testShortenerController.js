@@ -7,8 +7,9 @@ var ShortenerController = require(path + '/app/controllers/shortenerController.j
 
 describe('shortenerController', function() {
     var shortenerCtrl;
+    var dbName = "testCollection";
     before(function(done) {
-        connectDB("testCollection");
+        connectDB(dbName);
         shortenerCtrl = new ShortenerController();
         mongoose.connection.on('connected', function() {
 
@@ -54,18 +55,18 @@ describe('shortenerController', function() {
                 done();
             });
         })
-        
-    
+
+
 
         it('should have different shortenedUrl if multiple URLs entered', function(done) {
-            var url1 = "http://www.google.com";
-            var url2 = "http://www.yahoo.com";
+            var url1 = "http://www.diffurl.com";
+            var url2 = "http://www.diffurl2.com";
 
             shortenerCtrl.shortenUrl(url1, function(shortenedUrl1) {
                 expect(shortenedUrl1.id).to.be.a('number');
                 shortenerCtrl.shortenUrl(url2, function(shortenedUrl2) {
                     expect(shortenedUrl2.id).to.be.a('number');
-                    expect(shortenedUrl2.id).to.be.equal(shortenedUrl1.id + 1);
+                    expect(shortenedUrl2.id).not.to.be.equal(shortenedUrl1.id);
                     done();
                 });
             });
@@ -90,10 +91,20 @@ describe('shortenerController', function() {
         it('should return new added url\'s code', function(done) {
             var url = "https://www.google.com";
             shortenerCtrl.shortenUrl(url, function(newUrl) {
-                console.log(newUrl);
-                console.log(newUrl.code);
                 shortenerCtrl.getUrl(newUrl.code, function(returnedUrl) {
                     expect(returnedUrl).to.be(url);
+                    done();
+                });
+            });
+        })
+
+
+
+        it('should return same code of same url added', function(done) {
+            var url = "https://www.testurl.com";
+            shortenerCtrl.shortenUrl(url, function(newUrl1) {
+                shortenerCtrl.shortenUrl(url, function(newUrl2) {
+                    expect(newUrl1.code).to.be.equal(newUrl2.code);
                     done();
                 });
             });
@@ -110,5 +121,6 @@ describe('shortenerController', function() {
             console.log("done disconnecting");
             done();
         });
+    
     });
 });

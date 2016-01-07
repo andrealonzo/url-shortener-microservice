@@ -1,7 +1,7 @@
 'use strict';
 var validUrl = require('valid-url'),
     Url = require('../models/url.js'),
-     Base = require( '../controllers/base.js');
+    Base = require('../controllers/base.js');
 
 function ShortenerController() {
     var base = new Base();
@@ -9,20 +9,33 @@ function ShortenerController() {
         if (!validUrl.isUri(url)) {
             return done(null);
         }
-        var newUrl = new Url();
-        newUrl.value = url;
-
-        newUrl.save(function(err) {
-            if (err) {
-                return done(null);
+        //check if url exists
+        Url.findOne({
+            value: url
+        }, function(error, existingUrl) {
+            if (existingUrl) {
+                //url exists
+                existingUrl.code = base.encode(existingUrl.id);
+                return done(existingUrl);
             }
-            newUrl.code = base.encode(newUrl.id);
-            return done(newUrl);
-        }.bind(this));
+
+            //save new url
+            var newUrl = new Url();
+            newUrl.value = url;
+            newUrl.save(function(err) {
+                if (err) {
+                    return done(null);
+                }
+                newUrl.code = base.encode(newUrl.id);
+                return done(newUrl);
+            }.bind(this));
+
+        });
+
     }
     this.getUrl = function(code, done) {
         var id = base.decode(code);
-        
+
         Url.findOne({
             id: id
         }, function(error, url) {

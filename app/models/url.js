@@ -10,7 +10,7 @@ var counter = mongoose.model('counter', CounterSchema);
 
 var Url = Schema({
         id:{type: Number, default:0, unique: true},
-        value:String
+        value:{type: String, unique: true}
     });
 
 
